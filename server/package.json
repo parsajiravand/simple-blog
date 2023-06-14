@@ -1,0 +1,16 @@
+{
+  "name": "kubes-task-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server index.js",
+    "dev": "nodemon index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.16.3",
+    "faker": "^5.5.3"
+  }
+}
