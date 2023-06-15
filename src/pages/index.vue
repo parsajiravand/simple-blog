@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePostStore } from "../store/posts";
-import { useUserStore } from "../store/users";
+import { User, useUserStore } from "../store/users";
 import { onMounted, ref, watch } from "vue";
 import Card from "../components/Card.vue";
 import { storeToRefs } from "pinia";
@@ -103,10 +103,9 @@ onMounted(() => {
       </div>
       <div v-for="post in posts" :key="post.that">
         <!-- setup skeleton when search -->
-
-        <Card :cardData="post" :user="findUser(post.userId)" class="h-full" />
+        <Card :cardData="post" :user="(findUser(post.userId) as User)" class="h-full" />
       </div>
-      <div v-if="posts.length === 0" class="">
+      <div v-if="posts.length === 0 && searchTerm" class="">
         <p class="text-center text-2xl text-gray-400">No posts found</p>
       </div>
     </div>

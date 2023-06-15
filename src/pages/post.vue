@@ -4,10 +4,10 @@
     <div class="flex flex-row justify-start align-middle">
       <router-link
         :to="{ name: 'index' }"
-        class="flex flex-row items-center mb-4 border rounded-full  p-3 text-center hover:border-blue-300 hover:text-blue-500 transition ease-in-out duration-300"
+        class="flex flex-row items-center mb-4 border rounded-full p-3 text-center hover:border-blue-300 hover:text-blue-500 transition ease-in-out duration-300"
       >
         <svg
-          class="w-6 h-6   cursor-pointer   mx-auto"
+          class="w-6 h-6 cursor-pointer mx-auto"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -25,7 +25,7 @@
       <h1 class="text-2xl font-bold text-gray-800 mx-2 mt-2">Post</h1>
     </div>
     <div
-      class="box-border flex flex-col items-start justify-between border p-3 border-gray-100 rounded-md"
+      class="box-border flex flex-col items-start justify-between  p-3 rounded-md"
     >
       <!-- Card content goes here -->
       <img class="w-full h-auto" :src="post.image" alt="Card Image" />
@@ -87,14 +87,14 @@
 
 <script setup lang="ts">
 import Tag from "../components/Tag.vue";
-import { transcute, dateFormat } from "../composables";
+import { dateFormat } from "../composables";
 import { usePostStore } from "../store/posts";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { User, useUserStore } from "../store/users";
 const postStore = usePostStore();
-const { post, isLoading } = storeToRefs(postStore);
+const { post } = storeToRefs(postStore);
 const userStore = useUserStore();
 const { users } = storeToRefs(userStore);
 const route = useRoute();
@@ -106,15 +106,11 @@ const findUser = (userId: number) => {
   return users.value.find((user) => user.id === userId);
 };
 onMounted(async () => {
-  await postStore.fetchPost(route.params.id);
+  await postStore.fetchPost(route.params.id as string);
   // fetch users if not fetched
   if (users.value.length === 0) {
     await userStore.fetchUsers();
   }
-  user.value = findUser(post.value.userId);
+  user.value = findUser(post.value.userId) as User;
 });
 </script>
-
-<style scoped>
-/* Add your custom styles here */
-</style>

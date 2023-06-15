@@ -1,5 +1,5 @@
 const faker = require("faker");
-const POSTS_COUNT = 200;
+const POSTS_COUNT = 20;
 const USERS_COUNT = 100;
 
 const posts = [];

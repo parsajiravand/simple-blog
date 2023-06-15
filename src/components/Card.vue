@@ -75,13 +75,15 @@
 <script setup lang="ts">
 import Tag from "./Tag.vue";
 import { transcute, dateFormat } from "../composables";
+import { type User } from "../store/users";
+import { PropType } from "vue";
 defineProps({
   cardData: {
     type: Object,
     required: true,
   },
   user: {
-    type: Object,
+    type: Object as PropType<User>,
     required: true,
   },
 });
