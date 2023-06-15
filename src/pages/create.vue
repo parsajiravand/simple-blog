@@ -148,14 +148,7 @@ onMounted(async () => {
           <MultiSelectTagging
             v-model="form.tags"
             allow-custom-tag
-            :options="[
-              { title: 'Vue js', id: 'vue' },
-              { title: 'Angular', id: 'angular' },
-              { title: 'React', id: 'react' },
-              { title: 'Svelte', id: 'svelte' },
-              { title: 'Ember', id: 'ember' },
-              { title: 'Laravel', id: 'laravel' },
-            ]"
+            :options="['tag1', 'tag2', 'tag3', 'tag4', 'tag5']"
             :field-name="{
               label: 'title',
               key: 'id',

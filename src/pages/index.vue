@@ -59,7 +59,7 @@ onMounted(() => {
         </svg>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search By Title"
           v-model="searchTerm"
           class="flex-grow outline-none text-sm"
         />

@@ -4,12 +4,10 @@
       <div>
         <div
           v-for="tag in selectedTags"
-          :key="tag[props.fieldName.key]"
+          :key="tag"
           class="inline-flex items-center my-1 mr-1 px-3 py-1 text-xs text-gray-600 border rounded-full"
         >
-          <span class="text-xs font-semibold me-2">{{
-            tag[props.fieldName.label]
-          }}</span>
+          <span class="text-xs font-semibold me-2">{{ tag }}</span>
           <button @click="removeTag(tag)">
             <!-- add close svg icon -->
             <svg
@@ -57,11 +55,11 @@
         <ul v-if="showOptions" class="list-items">
           <li
             v-for="option in filterResult"
-            :key="option[props.fieldName.key]"
+            :key="option"
             @click="selectOption(option)"
             class="item"
           >
-            {{ option[props.fieldName.label] }}
+            {{ option }}
           </li>
         </ul>
         <ul class="list-items" v-if="showOptions && !filterResult.length">
@@ -123,10 +121,7 @@ watch(
 function addTag() {
   if (props.allowCustomTag) {
     if (inputValue.value && !selectedTags.value.includes(inputValue.value)) {
-      selectedTags.value.push({
-        [props.fieldName.label]: inputValue.value,
-        [props.fieldName.key]: inputValue.value,
-      });
+      selectedTags.value.push(inputValue.value);
       inputValue.value = "";
     }
   }
@@ -150,14 +145,14 @@ function selectOption(option: string) {
 
 function filterOptions(query: string) {
   return options.filter((option) =>
-    option[props.fieldName.label].toLowerCase().includes(query.toLowerCase())
+    option.toLowerCase().includes(query.toLowerCase())
   );
 }
 
 // computed
 const filterResult = computed(() => {
   return filterOptions(inputValue.value).filter(
-    (option) => !selectedTags.value.includes(option[props.fieldName.key])
+    (option) => !selectedTags.value.includes(option)
   );
 });
 
