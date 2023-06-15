@@ -1,19 +1,15 @@
-<script>
-export default {
-  data() {
-    return {
-      form: {
-        id: null,
-        image: "",
-        likes: null,
-        tags: [],
-        publishDate: "",
-        text: "",
-        userId: null,
-      },
-    };
-  },
-};
+<script setup lang="ts">
+import { reactive } from "vue";
+import MultiSelectTagging from "../components/MultiSelectTagging.vue";
+const form = reactive({
+  id: null,
+  image: "",
+  likes: null,
+  tags: [],
+  publishDate: "",
+  text: "",
+  userId: null,
+});
 </script>
 
 <template>
@@ -99,11 +95,21 @@ export default {
           <label class="block mb-2 text-sm font-medium text-gray-700" for="tags"
             >Tags</label
           >
-          <input
-            class="w-full p-2 border border-gray-300 rounded"
-            type="text"
-            id="tags"
+          <MultiSelectTagging
             v-model="form.tags"
+            allow-custom-tag
+            :options="[
+              { title: 'Vue js', id: 'vue' },
+              { title: 'Angular', id: 'angular' },
+              { title: 'React', id: 'react' },
+              { title: 'Svelte', id: 'svelte' },
+              { title: 'Ember', id: 'ember' },
+              { title: 'Laravel', id: 'laravel' },
+            ]"
+            :field-name="{
+              label: 'title',
+              key: 'id',
+            }"
           />
         </div>
 
@@ -156,8 +162,7 @@ input {
   border-radius: 8px;
   &:focus {
     outline: none;
-    border: 1px solid #9D9D9D;
+    border: 1px solid #9d9d9d;
   }
 }
-
 </style>
