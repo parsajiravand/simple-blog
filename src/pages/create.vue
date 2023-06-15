@@ -24,6 +24,8 @@ const { users } = storeToRefs(userStore);
 
 const onSubmit = async () => {
   // handeling form validation simple way
+  // @notice: this is not the best way to do it but it's simple
+  // if you want to do it the best way you can use vee-validate
   const validation = [
     form.title.length > 0,
     form.image.length > 0,
@@ -81,7 +83,7 @@ onMounted(async () => {
             ></path>
           </svg>
         </router-link>
-        <h1 class="text-2xl font-bold text-gray-700 mx-2">Post</h1>
+        <h1 class="text-2xl font-bold text-gray-700 mx-3">New Post</h1>
       </div>
 
       <!--  Publish post button -->

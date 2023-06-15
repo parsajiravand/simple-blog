@@ -16,7 +16,6 @@ const searchTerm = ref<string>("");
 watch(
   searchTerm,
   //set isLoading to true
-
   _.debounce((newVal: string) => {
     postStore.fetchPosts(newVal.trim());
   }, 300)
@@ -70,29 +69,26 @@ onMounted(() => {
           :to="{
             name: 'create',
           }"
-          class="flex items-center justify-center p-2 rounded-full px-4 h-10 bg-blue-500 shadow-md"
+          class="flex items-center justify-center p-2 rounded-full px-4 h-10 bg-blue-500 shadow-md hover:bg-blue-600"
         >
           <span class="text-white">Add new post</span>
           <!-- add plus-circle white -->
           <svg
-            class="w-5 h-5 text-white mx-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+
+            viewBox="0 0 24 24"
+            class="text-white  ml-2 w-6 h-6"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
+              fill="currentColor"
+              d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"
+            />
           </svg>
         </router-link>
       </div>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
       <div
         v-if="isLoading"
         v-for="index in 20"
@@ -101,9 +97,13 @@ onMounted(() => {
       >
         <div class="bg-gray-300 rounded h-96"></div>
       </div>
-      <div v-for="post in posts" :key="post.that">
+      <div v-for="post in posts" :key="post.that" class="my-3 hover:shadow-lg">
         <!-- setup skeleton when search -->
-        <Card :cardData="post" :user="(findUser(post.userId) as User)" class="h-full" />
+        <Card
+          :cardData="post"
+          :user="(findUser(post.userId) as User)"
+          class="h-full"
+        />
       </div>
       <div v-if="posts.length === 0 && searchTerm" class="">
         <p class="text-center text-2xl text-gray-400">No posts found</p>
