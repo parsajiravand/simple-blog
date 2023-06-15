@@ -1,46 +1,49 @@
 <template>
   <div class="relative">
     <section class="custom-multi-select">
+      <div>
+        <div
+          v-for="tag in selectedTags"
+          :key="tag[props.fieldName.key]"
+          class="inline-flex items-center my-1 mr-1 px-3 py-1 text-xs text-gray-600 border rounded-full"
+        >
+          <span class="text-xs font-semibold me-2">{{
+            tag[props.fieldName.label]
+          }}</span>
+          <button @click="removeTag(tag)">
+            <!-- add close svg icon -->
+            <svg
+              class="w-3 h-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 8.586L15.95 2.636a1 1 0 111.414 1.414L11.414 10l5.95 5.95a1 1 0 11-1.414 1.414L10 11.414l-5.95 5.95a1 1 0 11-1.414-1.414L8.586 10 2.636 4.05A1 1 0 114.05 2.636L10 8.586z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
       <OnClickOutside :clickOutside="() => (showOptions = false)">
         <div class="flex flex-wrap flex-col rounded border">
-          <div>
-            <div
-              v-for="tag in selectedTags"
-              :key="tag[props.fieldName.key]"
-              class="inline-flex items-center px-1 py-1 m-1 bg-gray-200 rounded"
-            >
-              <span class="text-xs font-semibold me-2">{{
-                tag[props.fieldName.label]
-              }}</span>
-              <button @click="removeTag(tag)">
-                <!-- add close svg icon -->
-                <svg
-                  class="w-3 h-3 text-gray-500 hover:text-gray-700 cursor-pointer"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M10 8.586L15.95 2.636a1 1 0 111.414 1.414L11.414 10l5.95 5.95a1 1 0 11-1.414 1.414L10 11.414l-5.95 5.95a1 1 0 11-1.414-1.414L8.586 10 2.636 4.05A1 1 0 114.05 2.636L10 8.586z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
           <div class="relative">
             <input
               v-model="inputValue"
               @keydown.escape="inputValue = ''"
-              class="custom-input "
+              class="custom-input"
               placeholder="Add tag..."
               @click="showOptions = !showOptions"
             />
-            <button @click="addTag()" 
-            class="font-bold text-blue-500 absolute right-0 bottom-10"
-             :class="inputValue.length ? 'text-blue-500' : 'text-gray-300'"
-             >Add +</button>
+            <button
+              @click="addTag()"
+              class="font-bold text-blue-500 absolute right-2 bottom-2"
+              :class="inputValue.length ? 'text-blue-500' : 'text-gray-300'"
+            >
+              Add +
+            </button>
           </div>
 
           <Icon
@@ -64,7 +67,6 @@
         <ul class="list-items" v-if="showOptions && !filterResult.length">
           <li class="item text-center">No item found</li>
         </ul>
-     
       </OnClickOutside>
     </section>
   </div>
