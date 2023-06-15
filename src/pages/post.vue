@@ -1,24 +1,29 @@
 <template>
   <div class="max-w-4xl mx-auto p-4">
     <!-- back home -->
-    <router-link :to="{name:'posts'}" class="flex flex-row items-center mb-4">
-      <svg
-        class="w-6 h-6 text-gray-400 mr-2 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        @click="$router.push({ name: 'Home' })"
+    <div class="flex flex-row justify-start align-middle">
+      <router-link
+        :to="{ name: 'index' }"
+        class="flex flex-row items-center mb-4 border rounded-full  p-3 text-center hover:border-blue-300 hover:text-blue-500 transition ease-in-out duration-300"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M10 19l-7-7m0 0l7-7m-7 7h18"
-        ></path>
-      </svg>
-      <h1 class="text-2xl font-bold text-gray-800">Post</h1>
+        <svg
+          class="w-6 h-6   cursor-pointer   mx-auto"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          @click="$router.push({ name: 'Home' })"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          ></path>
+        </svg>
       </router-link>
+      <h1 class="text-2xl font-bold text-gray-800 mx-2 mt-2">Post</h1>
+    </div>
     <div
       class="box-border flex flex-col items-start justify-between border p-3 border-gray-100 rounded-md"
     >

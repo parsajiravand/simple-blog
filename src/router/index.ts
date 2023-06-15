@@ -12,8 +12,8 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "/",
-        name: "posts",
-        component: () => import("../pages/posts.vue"),
+        name: "index",
+        component: () => import("../pages/index.vue"),
       },
     ],
   },
@@ -22,6 +22,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/post/:id",
     name: "post",
     component: () => import("../pages/post.vue"),
+  },
+  // create post page
+  {
+    path: "/create",  
+    name: "create",
+    component: () => import("../pages/create-post.vue"),
   },
 
   {

@@ -3,12 +3,13 @@
     class="box-border flex flex-col items-start justify-between border p-3 border-gray-100 rounded-md"
   >
     <!-- Card content goes here -->
-    <img class="w-full h-auto" :src="cardData.image" alt="Card Image" />
-    <router-link
-      :to="{ name: 'post', params: { id: cardData.id } }"
-      class="text-xl font-bold text-gray-800 my-2 hover:text-blue-500 cursor-pointer transition duration-300 ease-in-out"
-    >
-      {{ transcute(cardData.title) }}
+    <router-link :to="{ name: 'post', params: { id: cardData.id } }">
+      <img class="w-full h-auto" :src="cardData.image" alt="Card Image" />
+      <div
+        class="text-xl font-bold text-gray-800 my-2 hover:text-blue-500 cursor-pointer transition duration-300 ease-in-out"
+      >
+        {{ transcute(cardData.title) }}
+      </div>
     </router-link>
 
     <p class="text-sm">{{ transcute(cardData.text, 128) }}</p>
