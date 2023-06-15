@@ -4,14 +4,16 @@ import MultiSelectTagging from "../components/MultiSelectTagging.vue";
 import { Post, usePostStore } from "../store/posts";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../store/users";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const form = reactive({
   title: "",
   image: "",
-  likes: null,
+  likes: 0,
   tags: [],
-  publishDate: "",
+  publishDate: new Date().toISOString().slice(0, 10),
   text: "",
-  userId: null,
+  userId: 0,
 }) as Post;
 const postStore = usePostStore();
 const { isLoading } = storeToRefs(postStore);
@@ -20,10 +22,33 @@ const { isLoading } = storeToRefs(postStore);
 const userStore = useUserStore();
 const { users } = storeToRefs(userStore);
 
-const onSubmit = () => {
-  postStore.createPost(form as Post);
+const onSubmit = async () => {
+  // handeling form validation simple way
+  const validation = [
+    form.title.length > 0,
+    form.image.length > 0,
+    form.likes !== null,
+    form.tags.length > 0,
+    form.publishDate.length > 0,
+    form.text.length > 0,
+    form.userId !== null,
+  ];
+  if (validation.includes(false)) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const res = await postStore.createPost(form as Post);
+  // check if post created successfully
+  if (res?.status === 201) {
+    alert("Post created successfully");
+    router.push({ name: "index" });
+
+    return;
+  }
 };
 onMounted(async () => {
+  // fetch users if not fetched
   if (users.value.length === 0) {
     await userStore.fetchUsers();
   }
@@ -56,7 +81,7 @@ onMounted(async () => {
             ></path>
           </svg>
         </router-link>
-        <h1 class="text-2xl font-bold text-gray-800 mx-2">Post</h1>
+        <h1 class="text-2xl font-bold text-gray-700 mx-2">Post</h1>
       </div>
 
       <!--  Publish post button -->
@@ -82,6 +107,7 @@ onMounted(async () => {
             type="text"
             id="id"
             v-model="form.title"
+            required
           />
         </div>
 
@@ -96,6 +122,7 @@ onMounted(async () => {
             type="text"
             id="image"
             v-model="form.image"
+            required
           />
         </div>
 
@@ -110,6 +137,7 @@ onMounted(async () => {
             type="number"
             id="likes"
             v-model="form.likes"
+            required
           />
         </div>
 
@@ -144,6 +172,7 @@ onMounted(async () => {
             type="text"
             id="text"
             v-model="form.text"
+            required
           />
         </div>
 
@@ -157,6 +186,7 @@ onMounted(async () => {
             class="w-full p-2 border border-gray-300 rounded"
             id="userId"
             v-model="form.userId"
+            required
           >
             <option
               class="p-2"

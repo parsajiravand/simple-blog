@@ -3,14 +3,14 @@ import { ref } from "vue";
 import { api } from "../api";
 
 export interface Post {
-  title: string | null;
+  title: string;
   that?: number;
-  text: string | null;
-  image: string | null;
-  likes: number | null;
-  tags: string[] | null;
-  publishDate: string | null;
-  userId: number | null;
+  text: string;
+  image: string;
+  likes: number;
+  tags: string[];
+  publishDate: string;
+  userId: number;
 }
 
 export const usePostStore = defineStore("post", {
@@ -55,8 +55,9 @@ export const usePostStore = defineStore("post", {
     async createPost(payload: Post) {
       try {
         this.isLoading = true;
-        const { data } = await api.post<Post>("/posts", payload);
+        const res = await api.post<Post>("/posts", payload);
         this.isLoading = false;
+        return res;
       } catch (error) {
         console.error("Error creating post:", error);
       }
