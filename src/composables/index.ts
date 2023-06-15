@@ -1,4 +1,4 @@
-export const transcute = (str: string, length = 20) => {
+export const transcute = (str: string = "", length = 20) => {
   return str.length > length ? str.slice(0, length) + "..." : str;
 };
 

@@ -3,20 +3,20 @@ import { ref } from "vue";
 import { api } from "../api";
 
 export interface Post {
-  title: string;
-  that: number;
-  text: string;
-  image: string;
-  likes: number;
-  tags: string[];
-  publishDate: string;
-  userId: number;
+  title: string | null;
+  that?: number;
+  text: string | null;
+  image: string | null;
+  likes: number | null;
+  tags: string[] | null;
+  publishDate: string | null;
+  userId: number | null;
 }
 
 export const usePostStore = defineStore("post", {
   state: () => ({
     posts: ref<Post[]>([]),
-    post: ref<Post >({
+    post: ref<Post>({
       title: "test",
       that: 0,
       text: "",
@@ -49,6 +49,16 @@ export const usePostStore = defineStore("post", {
         this.post = data;
       } catch (error) {
         console.error("Error fetching post:", error);
+      }
+    },
+    // create posts
+    async createPost(payload: Post) {
+      try {
+        this.isLoading = true;
+        const { data } = await api.post<Post>("/posts", payload);
+        this.isLoading = false;
+      } catch (error) {
+        console.error("Error creating post:", error);
       }
     },
   },

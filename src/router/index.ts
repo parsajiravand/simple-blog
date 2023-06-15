@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/create",  
     name: "create",
-    component: () => import("../pages/create-post.vue"),
+    component: () => import("../pages/create.vue"),
   },
 
   {

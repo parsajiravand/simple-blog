@@ -65,7 +65,11 @@ onMounted(() => {
         />
       </div>
       <div>
-        <button
+        <router-link
+          tag="button"
+          :to="{
+            name: 'create',
+          }"
           class="flex items-center justify-center p-2 rounded-full px-4 h-10 bg-blue-500 shadow-md"
         >
           <span class="text-white">Add new post</span>
@@ -84,7 +88,7 @@ onMounted(() => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             ></path>
           </svg>
-        </button>
+        </router-link>
       </div>
     </header>
 

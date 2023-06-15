@@ -1,5 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./pages/404.scss"
+@import "./pages/404.scss";
 
+button{
+    opacity: 0.9;
+    &:hover{
+        opacity: 1;
+    }
+}
