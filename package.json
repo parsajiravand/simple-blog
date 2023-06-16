@@ -1,6 +1,5 @@
 {
-  "name": "ice-test-case",
-  "private": true,
+  "name": "simple-blog",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
