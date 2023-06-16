@@ -6,8 +6,12 @@ import Card from "../components/Card.vue";
 import { storeToRefs } from "pinia";
 //@ts-ignore
 import _ from "lodash";
+
+// post store
 const postStore = usePostStore();
 const { posts, isLoading } = storeToRefs(postStore);
+
+// user store
 const userStore = useUserStore();
 const { users } = storeToRefs(userStore);
 
@@ -20,6 +24,8 @@ watch(
     postStore.fetchPosts(newVal.trim());
   }, 300)
 );
+
+// find each user in post By id
 const findUser = (userId: number) => {
   return users.value.find((user) => user.id === userId);
 };

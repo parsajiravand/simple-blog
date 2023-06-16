@@ -17,7 +17,7 @@ export const usePostStore = defineStore("post", {
   state: () => ({
     posts: ref<Post[]>([]),
     post: ref<Post>({
-      title: "test",
+      title: "",
       that: 0,
       text: "",
       image: "",
@@ -40,6 +40,8 @@ export const usePostStore = defineStore("post", {
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
+      this.isLoading = false;
+
     },
     async fetchPost(id: string) {
       try {

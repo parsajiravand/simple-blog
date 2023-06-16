@@ -93,11 +93,17 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { User, useUserStore } from "../store/users";
+
+// route
+const route = useRoute();
+
+// post store
 const postStore = usePostStore();
 const { post } = storeToRefs(postStore);
+
+// user store
 const userStore = useUserStore();
 const { users } = storeToRefs(userStore);
-const route = useRoute();
 
 const user = ref<User | null>(null);
 

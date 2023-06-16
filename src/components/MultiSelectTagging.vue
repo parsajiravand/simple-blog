@@ -25,55 +25,46 @@
           </button>
         </div>
       </div>
-      <OnClickOutside :clickOutside="() => (showOptions = false)">
-        <div class="flex flex-wrap flex-col rounded border">
-          <div class="relative">
-            <input
-              v-model="inputValue"
-              @keydown.escape="inputValue = ''"
-              class="custom-input"
-              placeholder="Add tag..."
-              @click="showOptions = !showOptions"
-            />
-            <button
-              @click="addTag()"
-              class="font-bold text-blue-500 absolute right-2 bottom-2"
-              :class="inputValue.length ? 'text-blue-500' : 'text-gray-300'"
-            >
-              Add +
-            </button>
-          </div>
 
-          <Icon
+      <div class="flex flex-wrap flex-col rounded border">
+        <div class="relative">
+          <input
+            v-model="inputValue"
+            @keydown.escape="inputValue = ''"
+            class="custom-input"
+            placeholder="Add tag..."
             @click="showOptions = !showOptions"
-            :class="showOptions ? 'rotate-180' : 'rotate-0'"
-            class="absolute text-gray-900 text-lg right-2 top-3"
-            name="mdi:chevron-down"
           />
-        </div>
-
-        <ul v-if="showOptions" class="list-items">
-          <li
-            v-for="option in filterResult"
-            :key="option"
-            @click="selectOption(option)"
-            class="item"
+          <button
+            @click="addTag()"
+            class="font-bold text-blue-500 absolute right-2 bottom-2"
+            :class="inputValue.length ? 'text-blue-500' : 'text-gray-300'"
           >
-            {{ option }}
-          </li>
-        </ul>
-        <ul class="list-items" v-if="showOptions && !filterResult.length">
-          <li class="item text-center">No item found</li>
-        </ul>
-      </OnClickOutside>
+            Add +
+          </button>
+        </div>
+      </div>
+
+      <ul v-if="showOptions" class="list-items">
+        <li
+          v-for="option in filterResult"
+          :key="option"
+          @click="selectOption(option)"
+          class="item"
+        >
+          {{ option }}
+        </li>
+      </ul>
+      <ul class="list-items" v-if="showOptions && !filterResult.length">
+        <li class="item text-center">No item found</li>
+      </ul>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, reactive, ref, watch } from "vue";
-//@ts-ignore
-import OnClickOutside from "./OnClickOutside.vue";
+
 const props = defineProps({
   options: {
     type: Array as () => Array<any>,
@@ -156,7 +147,7 @@ const filterResult = computed(() => {
   );
 });
 
-watch(selectedTags.value, (newValue, oldValue) => {
+watch(selectedTags.value, (newValue) => {
   emit("update:modelValue", newValue);
 });
 

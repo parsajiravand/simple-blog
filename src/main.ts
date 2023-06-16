@@ -12,5 +12,4 @@ app.use(router);
 
 
 // Attach the Axios instance to the app's config
-
 app.mount("#app");
